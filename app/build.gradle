@@ -60,5 +60,5 @@ dependencies {
     implementation "androidx.fragment:fragment-ktx:1.2.5"
 
     //ConstraintLayout
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.3'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
 }

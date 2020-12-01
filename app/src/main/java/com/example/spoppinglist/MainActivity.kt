@@ -28,6 +28,10 @@ class MainActivity : AppCompatActivity() {
     lateinit var productAdapter: ProductAdapter //Product Adapter
     val productViewModel by viewModels<ProductViewModel>() //Product ViewModel
 
+    /**
+     * Override of on create method
+     * Runs each time the main activity is recreated
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -37,7 +41,11 @@ class MainActivity : AppCompatActivity() {
         setUpRecyclerView()
     }
 
+    /**
+     * Floating button speed dial configuration
+     */
     private fun configFloatingButton() {
+        //Creates the first sub-button
         var addNewItemIcon = SpeedDialActionItem.Builder(R.id.add_product, R.drawable.shop_icon)
         addNewItemIcon.setLabel("Add product")
         addNewItemIcon.setFabBackgroundColor(
@@ -56,6 +64,7 @@ class MainActivity : AppCompatActivity() {
         )
         floatingButton.addActionItem(addNewItemIcon.create())
 
+        //Creates the second sub-button
         addNewItemIcon = SpeedDialActionItem.Builder(R.id.new_product, R.drawable.new_product_icon)
         addNewItemIcon.setLabel("New product")
         addNewItemIcon.setFabBackgroundColor(
@@ -74,6 +83,7 @@ class MainActivity : AppCompatActivity() {
         )
         floatingButton.addActionItem(addNewItemIcon.create())
 
+        //Adds onClickListener
         floatingButton.setOnActionSelectedListener { item ->
             when (item.id) {
                 R.id.new_product -> {
@@ -94,6 +104,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Sets up the recyclerView and the observer to look at items in the shopping list
+     */
     private fun setUpRecyclerView() {
 
         shoppingList.layoutManager = LinearLayoutManager(this)
@@ -120,6 +133,10 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    /**
+     * Sets the swipe delete method
+     * The user can delete an item by swiping to the right an element of the list
+     */
     private fun swipeControllerSet() {
 
         simpleCallback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
@@ -144,11 +161,17 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Runs each time the menu is created
+     */
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.tool_bar_menu, menu)
         return true
     }
 
+    /**
+     * Sets onClickListener to each menu item
+     */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId){
             R.id.remove_all->{
